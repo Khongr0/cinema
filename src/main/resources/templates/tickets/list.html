@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>Билеты</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+        <div class="container">
+            <a class="navbar-brand" href="/home"><i class="bi bi-film"></i> Кинотеатр</a>
+            <div class="navbar-nav ms-auto">
+                <a class="nav-link" href="/home">Главная</a>
+                <a class="nav-link" href="/about">Об авторе</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-4">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2><i class="bi bi-ticket-perforated"></i> Билеты</h2>
+            <a href="/tickets/new" class="btn btn-primary">
+                <i class="bi bi-plus-circle"></i> Купить билет
+            </a>
+        </div>
+
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Фильм</th>
+                        <th>Зал</th>
+                        <th>Время сеанса</th>
+                        <th>Место</th>
+                        <th>Цена</th>
+                        <th>Статус</th>
+                        <th>Время покупки</th>
+                        <th>Действия</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="ticket : ${tickets}">
+                        <td th:text="${ticket.id}"></td>
+                        <td><strong th:text="${ticket.session.movie.title}"></strong></td>
+                        <td th:text="${ticket.session.hall.name}"></td>
+                        <td th:text="${#temporals.format(ticket.session.startTime, 'dd.MM.yyyy HH:mm')}"></td>
+                        <td th:text="${ticket.seatNumber}"></td>
+                        <td th:text="${ticket.price} + ' ₽'"></td>
+                        <td>
+                            <span th:if="${ticket.status == 'ACTIVE'}" class="badge bg-success">Активен</span>
+                            <span th:if="${ticket.status == 'CANCELLED'}" class="badge bg-danger">Отменен</span>
+                            <span th:if="${ticket.status == 'USED'}" class="badge bg-secondary">Использован</span>
+                        </td>
+                        <td th:text="${#temporals.format(ticket.purchaseTime, 'dd.MM.yyyy HH:mm')}"></td>
+                        <td>
+                            <form th:if="${ticket.status == 'ACTIVE'}" 
+                                  th:action="@{/tickets/{id}/cancel(id=${ticket.id})}" 
+                                  method="post" class="d-inline">
+                                <button type="submit" class="btn btn-sm btn-warning" onclick="return confirm('Отменить билет?')">
+                                    <i class="bi bi-x-circle"></i> Отменить
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                    <tr th:if="${#lists.isEmpty(tickets)}">
+                        <td colspan="9" class="text-center">Билеты не найдены</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
+

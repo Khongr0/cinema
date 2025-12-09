@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Об авторе</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .navbar {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        .about-card {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="/home">
+                <i class="bi bi-film"></i> Кинотеатр
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/home">Главная</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="/about">Об авторе</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-4">
+        <div class="card about-card">
+            <div class="card-body p-5">
+                <h2 class="text-center mb-4">
+                    <i class="bi bi-person-circle"></i> Об авторе
+                </h2>
+                
+                <div class="row mb-4">
+                    <div class="col-md-6">
+                        <h5><i class="bi bi-person"></i> ФИО</h5>
+                        <p class="ms-4">[Ваше ФИО]</p>
+                    </div>
+                    <div class="col-md-6">
+                        <h5><i class="bi bi-building"></i> Группа / Учебное заведение</h5>
+                        <p class="ms-4">[Название группы]</p>
+                        <p class="ms-4">[Название учебного заведения]</p>
+                    </div>
+                </div>
+
+                <div class="mb-4">
+                    <h5><i class="bi bi-envelope"></i> Контактные данные</h5>
+                    <p class="ms-4">Email: [ваш email]</p>
+                    <p class="ms-4">Телефон: [ваш телефон]</p>
+                </div>
+
+                <div class="mb-4">
+                    <h5><i class="bi bi-code-slash"></i> Опыт работы с технологиями</h5>
+                    <p class="ms-4">
+                        В рамках данного проекта использовались следующие технологии:
+                    </p>
+                    <ul class="ms-4">
+                        <li><strong>Java</strong> - основной язык программирования</li>
+                        <li><strong>Spring Boot</strong> - фреймворк для создания веб-приложений</li>
+                        <li><strong>Spring Data JPA</strong> - для работы с базой данных</li>
+                        <li><strong>Hibernate</strong> - ORM для маппинга объектов на таблицы БД</li>
+                        <li><strong>MySQL</strong> - система управления базами данных</li>
+                        <li><strong>Thymeleaf</strong> - шаблонизатор для создания веб-интерфейса</li>
+                        <li><strong>Spring Security</strong> - для аутентификации и авторизации</li>
+                        <li><strong>Maven</strong> - система сборки проекта</li>
+                        <li><strong>Bootstrap</strong> - CSS фреймворк для создания современного интерфейса</li>
+                    </ul>
+                    <p class="ms-4">
+                        Проект позволил получить практический опыт работы с современными технологиями 
+                        разработки веб-приложений на Java, включая работу с базами данных, 
+                        реализацию системы безопасности и создание пользовательского интерфейса.
+                    </p>
+                </div>
+
+                <div class="mb-4">
+                    <h5><i class="bi bi-calendar"></i> Даты работы над проектом</h5>
+                    <p class="ms-4">Дата начала: [дата начала]</p>
+                    <p class="ms-4">Дата завершения: [дата завершения]</p>
+                </div>
+
+                <div class="text-center mt-4">
+                    <a href="/home" class="btn btn-primary">
+                        <i class="bi bi-arrow-left"></i> Вернуться на главную
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="bg-light text-center py-3 mt-5">
+        <div class="container">
+            <p class="text-muted mb-0">&copy; 2024 Информационно-справочная система кинотеатра</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
+
