@@ -22,10 +22,10 @@
                         <label class="form-label">Сеанс *</label>
                         <select class="form-select" name="sessionId" required>
                             <option value="">Выберите сеанс...</option>
-                            <option th:each="session : ${sessions}" 
-                                    th:value="${session.id}" 
-                                    th:text="${session.movie.title + ' - ' + session.hall.name + ' (' + #temporals.format(session.startTime, 'dd.MM.yyyy HH:mm') + ')'}"
-                                    th:selected="${selectedSession != null && selectedSession.id == session.id}"></option>
+                <option th:each="sess : ${sessions}" 
+                    th:value="${sess.id}" 
+                    th:text="${sess.movie.title + ' - ' + sess.hall.name + ' (' + #temporals.format(sess.startTime, 'dd.MM.yyyy HH:mm') + ')'}"
+                    th:selected="${selectedSession != null && selectedSession.id == sess.id}"></option>
                         </select>
                     </div>
                     <div class="mb-3" th:if="${selectedSession != null}">

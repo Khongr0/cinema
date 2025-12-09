@@ -5,7 +5,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
+// ...existing imports...
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import ru.cinema.model.Role;
@@ -15,7 +15,7 @@ import ru.cinema.repository.UserRepository;
 import ru.cinema.service.SessionService;
 import ru.cinema.service.TicketService;
 
-import jakarta.validation.Valid;
+// ...existing imports...
 import java.util.List;
 
 @Controller
@@ -67,27 +67,23 @@ public class TicketController {
     }
 
     @PostMapping
-    public String purchaseTicket(@Valid @ModelAttribute Ticket ticket, BindingResult result,
+    public String purchaseTicket(@ModelAttribute Ticket ticket,
                                 @RequestParam("sessionId") Long sessionId,
                                 @RequestParam("seatNumber") Integer seatNumber,
                                 RedirectAttributes redirectAttributes) {
-        if (result.hasErrors()) {
-            return "redirect:/tickets/new?sessionId=" + sessionId;
-        }
-        
         try {
             sessionService.getSessionById(sessionId).ifPresent(session -> {
                 ticket.setSession(session);
                 ticket.setSeatNumber(seatNumber);
-                
+
                 Authentication auth = SecurityContextHolder.getContext().getAuthentication();
                 if (auth != null && auth.isAuthenticated()) {
                     userRepository.findByUsername(auth.getName()).ifPresent(ticket::setUser);
                 }
-                
+
                 ticketService.purchaseTicket(ticket);
             });
-            
+
             redirectAttributes.addFlashAttribute("success", "Билет успешно приобретен");
             return "redirect:/tickets";
         } catch (Exception e) {
